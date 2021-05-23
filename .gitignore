@@ -1,5 +1,7 @@
 node_modules
+\doc
+\bin
+\data
+\tests
+
 package-lock.json
-/doc
-/bin
-/tests
