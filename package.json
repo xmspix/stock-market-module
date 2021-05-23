@@ -1,12 +1,22 @@
 {
   "name": "stock-market-module",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Stock Market Module",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "stock market"
+  ],
+  "author": "Mark Stoler <mark.stoler.86@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ws": "^7.4.4",
+    "@types/xml2json": "^0.11.3",
+    "axios": "^0.21.1",
+    "protobufjs": "^6.11.2",
+    "ws": "^7.4.5",
+    "xml2json": "^0.12.0"
+  }
 }
