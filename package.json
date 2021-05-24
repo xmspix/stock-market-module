@@ -16,8 +16,6 @@
     "@types/xml2json": "^0.11.3",
     "axios": "^0.21.1",
     "protobufjs": "^6.11.2",
-    "search-index": "github:fergiemcdowall/search-index",
-    "stock-market-module": "github:xmspix/stock-market-module",
     "ws": "^7.4.5",
     "xml2json": "^0.12.0"
   }
