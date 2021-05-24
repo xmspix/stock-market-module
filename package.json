@@ -1,5 +1,5 @@
 {
-  "name": "stock-market-module",
+  "name": "@xmspix/stock-market-module",
   "version": "1.0.0",
   "description": "Stock Market Module",
   "main": "src/index.ts",
