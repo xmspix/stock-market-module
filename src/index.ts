@@ -1,7 +1,7 @@
 import { Totc, Tsummery } from "./types";
 import { nasdaq } from "./util/nasdaq";
 import { otc } from "./util/otc";
-import { quoteSummary } from "./util/yahoo";
+import { quoteSummary, news } from "./util/yahoo";
 class StockMarketModules {
   nasdaq() {
     return nasdaq();
@@ -11,6 +11,9 @@ class StockMarketModules {
   }
   quoteSummary(options: Tsummery) {
     return quoteSummary(options);
+  }
+  news(symbol: string) {
+    return news(symbol);
   }
 }
 
