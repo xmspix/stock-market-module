@@ -7,6 +7,7 @@ export type ApiClient = {
   quoteSummary: (options: Tsummery) => Promise<any>;
   news: (symbol: string) => Promise<any>;
   chart: (options: Tchart) => Promise<any>;
+  earnings: () => Promise<any>;
 };
 
 export const createApiClient = (): ApiClient => {
@@ -50,5 +51,11 @@ export const createApiClient = (): ApiClient => {
         )
         .then((res) => res.data)
         .catch((error) => ({ error: true, message: error.message })),
+
+    earnings: () =>
+      axios
+        .get(`http://api.stocktwits.com/api/2/discover/earnings_calendar`)
+        .then((res: any) => res.data)
+        .catch((error) => console.log(error)),
   };
 };
