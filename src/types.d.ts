@@ -9,3 +9,10 @@ export type Tsummery = {
   symbol: string;
   modules: string | any[];
 };
+
+export type Tchart = {
+  symbol: string;
+  from: string;
+  to: string;
+  demo?: boolean;
+};

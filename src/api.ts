@@ -1,11 +1,12 @@
 import axios from "axios";
-import { Tsummery } from "./types";
+import { Tchart, Tsummery } from "./types";
 
 export type ApiClient = {
   nasdaqMarket: () => Promise<any>;
   otcMarket: () => Promise<any>;
   quoteSummary: (options: Tsummery) => Promise<any>;
   news: (symbol: string) => Promise<any>;
+  chart: (options: Tchart) => Promise<any>;
 };
 
 export const createApiClient = (): ApiClient => {
@@ -32,7 +33,7 @@ export const createApiClient = (): ApiClient => {
           `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${options.symbol}?modules=${options.modules}`
         )
         .then((res) => res.data)
-        .catch((error) => console.log(error)),
+        .catch((error) => ({ error: true, message: error.message })),
 
     news: (symbol: string) =>
       axios
@@ -40,6 +41,14 @@ export const createApiClient = (): ApiClient => {
           `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${symbol}&region=US&lang=en-US`
         )
         .then((res) => res.data)
-        .catch((error) => console.log(error)),
+        .catch((error) => ({ error: true, message: error.message })),
+
+    chart: (options: Tchart) =>
+      axios
+        .get(
+          `http://query1.finance.yahoo.com/v7/finance/chart/${options.symbol}?period1=${options.from}&period2=${options.to}&interval=1d&events=history`
+        )
+        .then((res) => res.data)
+        .catch((error) => ({ error: true, message: error.message })),
   };
 };
