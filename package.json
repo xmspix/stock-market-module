@@ -2,6 +2,7 @@
   "name": "@xmspix/stock-market-module",
   "version": "1.0.1",
   "description": "Stock Market Module",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc"
