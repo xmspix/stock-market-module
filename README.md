@@ -40,6 +40,13 @@ StockMarketModules.chart({
   .then((res) => console.log(res))
   .catch((error) => console.log(error));
 
+// Get real-time data from yahoo streamer
+const symbols = ["AAPL", "MSFT"];
+StockMarketModules.subscribe(symbols, (res, error) => {
+  if (error) console.log(error);
+  console.log(res);
+});
+
 // Get quoteSummary from yahoo.com
 const modules = [
   "assetProfile",

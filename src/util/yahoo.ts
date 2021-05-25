@@ -1,6 +1,8 @@
 import { Tchart, Tsummery } from "../types";
 import { createApiClient } from "../api";
 import parser from "xml2json";
+import protobufjs from "protobufjs";
+import WebSocket from "ws";
 
 const api = createApiClient();
 
@@ -59,4 +61,48 @@ export const chart = async (options: Tchart) => {
     }
     return newData;
   }
+};
+
+export const subscribe = async (symbol: any, callback: any) => {
+  const socket = new WebSocket(`wss://streamer.finance.yahoo.com/`);
+  // When a connection is made
+  socket.onopen = function () {
+    console.log("Connected to Yahoo finance streamer");
+    const json = { subscribe: symbol };
+    socket.send(JSON.stringify(json));
+  };
+
+  // When data is received
+  socket.onmessage = function (event: any) {
+    return protobufjs.load(
+      __dirname + "/PricingData.proto",
+      (err: any, root: any) => {
+        if (err) return { error: true, message: err.message };
+
+        const PricingData: any = root.lookupType("PricingData");
+        const buffer = Buffer.from(event.data, "base64");
+        const decode = JSON.parse(JSON.stringify(PricingData.decode(buffer)));
+
+        const data = {
+          symbol: decode.id,
+          price: parseFloat(decode.price).toFixed(2),
+          change: parseFloat(decode.change).toFixed(2),
+          changePercent: parseFloat(decode.changePercent).toFixed(2),
+          volume: parseInt(decode.dayVolume),
+        };
+
+        callback(data);
+      }
+    );
+  };
+
+  // When connection could not be made
+  socket.onerror = function (error: any) {
+    return { error: true, message: error.message };
+  };
+
+  // When connection was closed
+  socket.onclose = function (error: any) {
+    return { error: true, message: error.message };
+  };
 };
