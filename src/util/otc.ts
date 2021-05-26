@@ -25,8 +25,6 @@ export const otc = async (options: Totc) => {
 };
 
 const filterStocks = (data: any, options: Totc) => {
-  console.log(options);
-
   data = removeDuplicates(data);
 
   if (options && options.stocks)

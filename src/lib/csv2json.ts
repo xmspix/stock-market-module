@@ -1,19 +1,14 @@
 class csv2json {
   async convert(file: any) {
-    let data: any = [];
-    let headers: any = [];
-    let records: any = [];
-
-    await file.split(/\r?\n/).forEach((line: string) => {
-      data.push(line);
-    });
-
-    headers = await data
+    const headers: any = file
+      .split(/\r?\n/)
       .shift()
-      .split(",")
-      .map((e: any) => e.trim().replace(/\s/g, ""));
+      .replace(/\s/g, "")
+      .split(",");
 
-    return (records = await data.map((e: any) =>
+    const records: any = file.split(/\r?\n/).slice(1, -1);
+
+    return records.map((e) =>
       headers.reduce(
         (ac: any, a: number, i: number) => ({
           ...ac,
@@ -21,7 +16,7 @@ class csv2json {
         }),
         {}
       )
-    ));
+    );
   }
 }
 
