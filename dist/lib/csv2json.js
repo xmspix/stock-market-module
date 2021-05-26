@@ -12,17 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class csv2json {
     convert(file) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = [];
-            let headers = [];
-            let records = [];
-            yield file.split(/\r?\n/).forEach((line) => {
-                data.push(line);
-            });
-            headers = yield data
+            const headers = file
+                .split(/\r?\n/)
                 .shift()
-                .split(",")
-                .map((e) => e.trim().replace(/\s/g, ""));
-            return (records = yield data.map((e) => headers.reduce((ac, a, i) => (Object.assign(Object.assign({}, ac), { [a]: e.split(",")[i] ? e.split(",")[i].trim() : null })), {})));
+                .replace(/\s/g, "")
+                .split(",");
+            const records = file.split(/\r?\n/).slice(1, -1);
+            return records.map((e) => headers.reduce((ac, a, i) => (Object.assign(Object.assign({}, ac), { [a]: e.split(",")[i] ? e.split(",")[i].trim() : null })), {}));
         });
     }
 }

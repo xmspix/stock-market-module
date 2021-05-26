@@ -26,7 +26,6 @@ const otc = (options) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.otc = otc;
 const filterStocks = (data, options) => {
-    console.log(options);
     data = removeDuplicates(data);
     if (options && options.stocks)
         return data.filter((e) => e.SecType === "Common Stock");
