@@ -80,18 +80,20 @@ export const subscribe = async (symbol: any, callback: any) => {
         if (err) return { error: true, message: err.message };
 
         const PricingData: any = root.lookupType("PricingData");
-        const buffer = Buffer.from(event.data, "base64");
-        const decode = JSON.parse(JSON.stringify(PricingData.decode(buffer)));
+        const buffer: any = Buffer.from(event.data, "base64");
+        const decode: any = JSON.parse(
+          JSON.stringify(PricingData.decode(buffer))
+        );
 
-        const data = {
-          symbol: decode.id,
-          price: parseFloat(decode.price).toFixed(2),
-          change: parseFloat(decode.change).toFixed(2),
-          changePercent: parseFloat(decode.changePercent).toFixed(2),
-          volume: parseInt(decode.dayVolume),
-        };
+        // const data = {
+        //   symbol: decode.id,
+        //   price: <number>decode.price,
+        //   change: <number>decode.change,
+        //   changePercent: <number>decode.changePercent,
+        //   volume: <number>decode.dayVolume,
+        // };
 
-        callback(data);
+        callback(decode);
       }
     );
   };

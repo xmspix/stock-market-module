@@ -1,5 +1,10 @@
 # Stock Market Module
 
+[![Downloads][npm-downloads-img]][npm-link]
+
+[npm-link]: https://www.npmjs.com/package/@xmspix/stock-market-module
+[npm-downloads-img]: https://img.shields.io/npm/dw/@xmspix/stock-market-module
+
 # Installing
 
 ```bash
