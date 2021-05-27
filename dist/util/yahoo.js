@@ -80,14 +80,14 @@ const subscribe = (symbol, callback) => __awaiter(void 0, void 0, void 0, functi
             const PricingData = root.lookupType("PricingData");
             const buffer = Buffer.from(event.data, "base64");
             const decode = JSON.parse(JSON.stringify(PricingData.decode(buffer)));
-            const data = {
-                symbol: decode.id,
-                price: parseFloat(decode.price).toFixed(2),
-                change: parseFloat(decode.change).toFixed(2),
-                changePercent: parseFloat(decode.changePercent).toFixed(2),
-                volume: parseInt(decode.dayVolume),
-            };
-            callback(data);
+            // const data = {
+            //   symbol: decode.id,
+            //   price: <number>decode.price,
+            //   change: <number>decode.change,
+            //   changePercent: <number>decode.changePercent,
+            //   volume: <number>decode.dayVolume,
+            // };
+            callback(decode);
         });
     };
     // When connection could not be made
