@@ -8,7 +8,7 @@ class csv2json {
 
     const records: any = file.split(/\r?\n/).slice(1, -1);
 
-    return records.map((e) =>
+    return records.map((e: any) =>
       headers.reduce(
         (ac: any, a: number, i: number) => ({
           ...ac,

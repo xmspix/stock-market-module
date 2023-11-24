@@ -1,6 +1,12 @@
 import csv2json from "../lib/csv2json";
 import { createApiClient } from "../api";
-import { Totc } from "../types";
+
+export interface Iotc {
+  stocks?: boolean;
+  etf?: boolean;
+  country?: string;
+  demo?: boolean;
+};
 
 export type OTC = {
   Symbol: string;
@@ -15,7 +21,7 @@ export type OTC = {
 
 const api = createApiClient();
 
-export const otc = async (options: Totc) => {
+export const otc = async (options: Iotc) => {
   return await api
     .otcMarket()
     .then((res: string) => res)
@@ -24,7 +30,7 @@ export const otc = async (options: Totc) => {
     .then((res: any) => getData(res));
 };
 
-const filterStocks = (data: any, options: Totc) => {
+const filterStocks = (data: any, options: Iotc) => {
   data = removeDuplicates(data);
 
   if (options && options.stocks)
@@ -34,7 +40,7 @@ const filterStocks = (data: any, options: Totc) => {
   else return data;
 };
 
-const removeDuplicates = (arr) =>
+const removeDuplicates = (arr: any) =>
   arr.filter(
     (v: any, i: any, a: any) =>
       a.findIndex((t: any) => t.Symbol === v.Symbol) === i

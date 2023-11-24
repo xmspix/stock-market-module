@@ -1,4 +1,3 @@
-import { Tchart, Tsummery } from "../types";
 import { createApiClient } from "../api";
 import parser from "xml2json";
 import protobufjs from "protobufjs";
@@ -6,7 +5,20 @@ import WebSocket from "ws";
 
 const api = createApiClient();
 
-export const quoteSummary = async (options: Tsummery) => {
+export interface Ichart {
+  symbol: string;
+  from: string;
+  to: string;
+  interval: string;
+  demo?: boolean;
+};
+
+export interface Isummery {
+  symbol: string;
+  modules: string | any[];
+};
+
+export const quoteSummary = async (options: Isummery) => {
   options = {
     ...options,
     modules: options.modules.toString(),
@@ -32,7 +44,7 @@ export const news = async (symbol: string) => {
   });
 };
 
-export const chart = async (options: Tchart) => {
+export const chart = async (options: Ichart) => {
   options = {
     ...options,
     from: String(Number(new Date(`${options.from}T16:30:00`)) / 1000),

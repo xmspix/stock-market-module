@@ -4,6 +4,9 @@
 # build
 /dist
 
+#src
+/src
+
 # other
 /doc
 /bin

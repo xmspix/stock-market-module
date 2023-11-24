@@ -1,30 +1,41 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const nasdaq_1 = require("./util/nasdaq");
-const otc_1 = require("./util/otc");
-const stockTwits_1 = require("./util/stockTwits");
-const yahoo_1 = require("./util/yahoo");
-class StockMarketModules {
-    nasdaq() {
-        return nasdaq_1.nasdaq();
+exports.__esModule = true;
+var nasdaq_1 = require("./util/nasdaq");
+var otc_1 = require("./util/otc");
+var stockTwits_1 = require("./util/stockTwits");
+var yahoo_1 = require("./util/yahoo");
+var finviz_1 = require("./util/finviz");
+var StockMarketModules = /** @class */ (function () {
+    function StockMarketModules() {
     }
-    otc(options) {
-        return otc_1.otc(options);
-    }
-    quoteSummary(options) {
-        return yahoo_1.quoteSummary(options);
-    }
-    news(symbol) {
-        return yahoo_1.news(symbol);
-    }
-    chart(options) {
-        return yahoo_1.chart(options);
-    }
-    earnings() {
-        return stockTwits_1.earnings();
-    }
-    subscribe(symbols, callback) {
-        return yahoo_1.subscribe(symbols, callback);
-    }
-}
-exports.default = new StockMarketModules();
+    StockMarketModules.prototype.nasdaq = function () {
+        return (0, nasdaq_1.nasdaq)();
+    };
+    StockMarketModules.prototype.otc = function (options) {
+        return (0, otc_1.otc)(options);
+    };
+    StockMarketModules.prototype.quoteSummary = function (options) {
+        return (0, yahoo_1.quoteSummary)(options);
+    };
+    StockMarketModules.prototype.news = function (symbol) {
+        return (0, yahoo_1.news)(symbol);
+    };
+    StockMarketModules.prototype.chart = function (options) {
+        return (0, yahoo_1.chart)(options);
+    };
+    StockMarketModules.prototype.earnings = function () {
+        return (0, stockTwits_1.earnings)();
+    };
+    StockMarketModules.prototype.subscribe = function (symbols, callback) {
+        return (0, yahoo_1.subscribe)(symbols, callback);
+    };
+    // Finviz
+    StockMarketModules.prototype.finvizScreenerSymbols = function (url) {
+        return (0, finviz_1.finvizScreenerSymbols)(url);
+    };
+    StockMarketModules.prototype.finvizQuote = function (url) {
+        return (0, finviz_1.finvizQuote)(url);
+    };
+    return StockMarketModules;
+}());
+exports["default"] = new StockMarketModules();

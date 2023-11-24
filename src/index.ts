@@ -1,22 +1,23 @@
-import { Tchart, Totc, Tsummery } from "./types";
 import { nasdaq } from "./util/nasdaq";
-import { otc } from "./util/otc";
+import { otc, Iotc } from "./util/otc";
 import { earnings } from "./util/stockTwits";
-import { quoteSummary, news, chart, subscribe } from "./util/yahoo";
+import { quoteSummary, news, chart, subscribe, Isummery, Ichart } from "./util/yahoo";
+import { finvizScreenerSymbols, finvizQuote } from './util/finviz';
+
 class StockMarketModules {
   nasdaq() {
     return nasdaq();
   }
-  otc(options?: Totc) {
+  otc(options: Iotc) {
     return otc(options);
   }
-  quoteSummary(options: Tsummery) {
+  quoteSummary(options: Isummery) {
     return quoteSummary(options);
   }
   news(symbol: string) {
     return news(symbol);
   }
-  chart(options: Tchart) {
+  chart(options: Ichart) {
     return chart(options);
   }
   earnings() {
@@ -24,6 +25,13 @@ class StockMarketModules {
   }
   subscribe(symbols: string[], callback: any) {
     return subscribe(symbols, callback);
+  }
+  // Finviz
+  finvizScreenerSymbols(url: string) {
+    return finvizScreenerSymbols(url);
+  }
+  finvizQuote(url: string) {
+    return finvizQuote(url);
   }
 }
 
